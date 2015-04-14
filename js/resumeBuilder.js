@@ -76,6 +76,9 @@ var projects = {
  
 };
 
+bio.display = function()
+{
+
 var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
     $("#header").prepend(formattedRole);
 
@@ -92,28 +95,33 @@ var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
     $("#topContacts").append(formattedMobile);
 
 var formattedtwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-	$("#topContacts").append(formattedtwitter);
+    $("#topContacts").append(formattedtwitter);
 
 var formattedlocation = HTMLlocation.replace("%data%", bio.contacts.location);
-	$("#topContacts").append(formattedlocation);
+    $("#topContacts").append(formattedlocation);
 
 var formattedPic = HTMLbioPic.replace("%data%", bio.bioPic);   
-	$("#header").append(formattedPic);
+    $("#header").append(formattedPic);
 
 var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-	$("#header").append(formattedWelcomeMessage);
+    $("#header").append(formattedWelcomeMessage);
 
 
 $("#header").append(HTMLskillsStart);
 
 for (var i=0; i< bio.skills.length;i++) {
-	var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
-	$("#skills").append(formattedSkills);
+    var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+    $("#skills").append(formattedSkills);
 }
     
  $("#footerContacts").append(formattedMobile,formattedEmail,formattedtwitter);
 
- function displayWork() {
+}
+
+bio.display();
+
+work.display = function() {
+
     for (job in work.jobs) {
     $("#workExperience").append(HTMLworkStart);
     var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
@@ -130,8 +138,8 @@ for (var i=0; i< bio.skills.length;i++) {
     var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
     $(".work-entry:last").append(formattedLocation);
   }
-};
-displayWork ();
+}
+work.display();
 
 projects.display = function() {
     for (project in projects.projects) {
@@ -156,7 +164,7 @@ projects.display = function() {
 }
 projects.display();
 
-function displayEducation(){ 
+education.display = function() { 
     for (school in education.schools) {
     $("#education").append(HTMLschoolStart); 
     var formattedName = HTMLschoolName.replace( "%data%", education.schools[school].name); 
@@ -193,7 +201,7 @@ function displayEducation(){
     } 
 
 }; 
-displayEducation();
+education.display();
 
 // log clicks to console
 
@@ -213,6 +221,8 @@ var inName = function() {
   finalName = finalName.join(" ");
   return finalName;
 }
+
+
 
 // add map
 $("#mapDiv").append(googleMap)
